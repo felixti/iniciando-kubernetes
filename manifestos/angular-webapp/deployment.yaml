@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ng-webapp
+  namespace: tutorial-k8s
+  labels:
+    app: ng-webapp
+spec:
+  selector:
+    matchLabels:
+      app: ng-webapp
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: ng-webapp
+    spec:
+      containers:
+      - name: ng-webapp
+        image:  localhost:5000/angular-webapp:v1.1
+        resources:
+          requests:
+            cpu: 100m
+            memory: 100Mi
+          limits:
+            cpu: 100m
+            memory: 100Mi
+        ports:
+        - containerPort:  4002
